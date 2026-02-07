@@ -15,9 +15,13 @@
 </div>
 <div style="margin-left: 220px;">
   <h2>스터디 모집 목록</h2>
-  <div th:each="s : ${studies}" class="card">
+  <div th:each="s, iterStat : ${studies}" class="card">
     <h3 th:text="${s}">스터디 제목</h3>
-    <p>모집중</p>
+    <p>현재 모집 중인 스터디입니다.</p>
+
+    <a th:href="@{/study/{id}(id=${iterStat.count})}" class="detail-btn">
+      상세보기 →
+    </a>
   </div>
 </div>
 </body>

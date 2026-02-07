@@ -20,10 +20,14 @@ public class StudyController {
     // 2. 스터디 상세 화면 (GET /study/{id})
     @GetMapping("/study/{id}")
     public String detail(@PathVariable Long id, Model model) {
-        // 상세 화면용 더미 데이터
+        // 1. 클릭한 스터디 번호를 화면에 전달
         model.addAttribute("studyId", id);
-        model.addAttribute("title", "더미 스터디 제목 " + id);
-        model.addAttribute("content", "이것은 리더가 시킨 상세 페이지 더미 내용입니다.");
-        return "study/detail"; // templates/study/detail.html 파일을 찾음
+
+        // 2. 번호에 따라 다른 제목이 나오도록 임시 설정 (나중엔 DB에서 가져올 거예요)
+        String title = (id == 1) ? "일본어 기초 회화" : "스프링 부트 입문";
+        model.addAttribute("title", title);
+        model.addAttribute("content", "이 스터디는 " + title + "를 공부하는 모임입니다. 열공해요!");
+
+        return "study/detail"; // templates/study/detail.html 파일을 보여줌
     }
 }
