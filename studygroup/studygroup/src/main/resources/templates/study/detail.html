@@ -2,48 +2,94 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>StudyMate - 상세</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>StudyMate - 상세페이지</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
   <style>
-    :root { --primary-bg: #ffffff; --sidebar-bg: #e0e0e0; --card-bg: #4a4a4a; --radius-main: 4px; }
-    * { box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; }
-    .header { width: 100%; height: 60px; display: flex; justify-content: space-between; align-items: center; padding: 0 40px; border-bottom: 1px solid #eee; }
-    .main-wrapper { display: flex; height: calc(100vh - 60px); }
-    .sidebar { width: 240px; background-color: var(--sidebar-bg); display: flex; flex-direction: column; align-items: center; padding-top: 40px; }
+    :root {
+      --white: #ffffff;
+      --black: #222222;
+      --light-gray: #f0f0f0;
+      --radius: 12px;
+      --container-width: 1600px; /* 목록 페이지와 완벽 일치 */
+    }
 
-    .content { flex: 1; padding: 40px; }
-    /* Detail Container: W:800px */
-    .detail-box { width: 800px; border: 1px solid #ddd; padding: 40px; border-radius: var(--radius-main); }
-    .red-dot-large { width: 60px; height: 60px; background: #ff0000; border-radius: 50%; margin-right: 20px; }
-    .info-panel { background: #f5f5f5; padding: 30px; border-radius: var(--radius-main); margin: 30px 0; min-height: 200px; line-height: 1.8; }
-    .btn-apply { width: 100%; height: 56px; background: var(--card-bg); color: #fff; border: none; font-weight: 700; cursor: pointer; border-radius: var(--radius-main); }
+    * { box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; border: none; }
+    body { background-color: #ffffff; color: var(--black); min-height: 1080px; }
+
+    .header {
+      width: var(--container-width); height: 180px;
+      margin: 0 auto; display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .logo-area img { height: 150px; width: auto; display: block; }
+    .header-menu { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+    .menu-btn {
+      background: var(--light-gray); padding: 12px 30px; border-radius: 8px;
+      font-size: 26px; cursor: pointer; min-width: 180px; font-weight: 600;
+    }
+
+    .main-content-wrapper {
+      width: var(--container-width); margin: 0 auto 60px auto;
+      background: linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url('https://via.placeholder.com/1600x900/ffffff/000000');
+      background-size: cover; border-radius: var(--radius);
+      padding: 80px; display: flex; flex-direction: column; gap: 60px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    }
+
+    .study-title { font-size: 64px; font-weight: 800; line-height: 1.1; }
+    .study-hashtags { font-size: 34px; color: #444; font-weight: 500; }
+
+    .description-box { background: rgba(255, 255, 255, 0.6); padding: 60px; border-radius: var(--radius); }
+    .description-box h3 { font-size: 40px; border-bottom: 4px solid var(--black); padding-bottom: 20px; margin-bottom: 30px; }
+    .description-box p { line-height: 1.8; font-size: 32px; }
+
+    .action-section { display: flex; gap: 60px; align-items: flex-end; }
+    .creator-info {
+      display: flex; align-items: center; gap: 40px; flex: 1; height: 180px;
+      background: rgba(255, 255, 255, 0.7); padding: 40px 50px; border-radius: var(--radius);
+    }
+    .profile-img { width: 100px; height: 100px; background: var(--black); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 60px; }
+    .creator-text b { font-size: 34px; display: block; margin-bottom: 8px; }
+    .creator-text span { font-size: 28px; color: #555; }
+
+    .participation-group { display: flex; flex-direction: column; gap: 20px; width: 450px; }
+    .info-bar { background: rgba(255, 255, 255, 0.8); border-radius: var(--radius); height: 80px; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 600; }
+
+    .btn-join {
+      width: 100%; height: 110px; background: var(--white); color: var(--black);
+      border-radius: var(--radius); font-size: 36px; font-weight: 700; cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: 0.2s;
+    }
+    .btn-join:hover { background: #f8f8f8; transform: translateY(-5px); }
   </style>
 </head>
 <body>
 <header class="header">
-  <a href="/study" style="text-decoration: none; color: #000; font-weight: 700; font-size: 22px;">StudyMate</a>
+  <div class="logo-area"><img src="https://via.placeholder.com/600x150?text=StudyMate+Logo" alt="로고"></div>
+  <div class="header-menu">
+    <button class="menu-btn">my page</button>
+    <button class="menu-btn">게시물 작성</button>
+  </div>
 </header>
-
-<div class="main-wrapper">
-  <aside class="sidebar">
-    <div style="width: 90px; height: 90px; background: #777; border-radius: 50%; margin-bottom: 20px;"></div>
-    <p>my page</p>
-  </aside>
-
-  <main class="content">
-    <a href="/study" style="text-decoration: none; color: #666; font-size: 14px; margin-bottom: 20px; display: inline-block;">← 목록으로 돌아가기</a>
-    <div class="detail-box">
-      <div style="display: flex; align-items: center;">
-        <div class="red-dot-large"></div>
-        <h1 th:text="${title}">스터디 제목</h1>
-      </div>
-      <div class="info-panel">
-        <h3 style="margin-bottom: 15px;">스터디 상세 소개</h3>
-        <p th:text="${content}">여기에 개별 스터디 내용이 출력됩니다.</p>
-      </div>
-      <button class="btn-apply">스터디 신청하기</button>
+<div class="main-content-wrapper">
+  <div class="banner-text">
+    <h1 class="study-title" th:text="${title}">제목 표시 영역</h1>
+    <p class="study-hashtags">#일본어 #비즈니스일본어 #JLPT #일상회화</p>
+  </div>
+  <div class="description-box">
+    <h3>스터디 상세 설명</h3>
+    <p th:text="${content}">내용이 출력됩니다.</p>
+  </div>
+  <div class="action-section">
+    <div class="creator-info">
+      <div class="profile-img">👤</div>
+      <div class="creator-text"><b>개설자: 스시타베타이</b><span>ID: aaa111</span></div>
     </div>
-  </main>
+    <div class="participation-group">
+      <div class="info-bar">참여인원: 4 / 5</div>
+      <button class="btn-join">지금 참여하기</button>
+    </div>
+  </div>
 </div>
 </body>
 </html>
