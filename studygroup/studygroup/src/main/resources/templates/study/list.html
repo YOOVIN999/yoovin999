@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>스터디 목록</title>
+  <style>
+    .card { border: 1px solid #ddd; padding: 20px; margin: 10px; border-radius: 8px; }
+    .sidebar { width: 200px; float: left; border-right: 1px solid #eee; height: 100vh; }
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <h3>StudyMate</h3>
+  <p>스터디 찾기</p>
+</div>
+<div style="margin-left: 220px;">
+  <h2>스터디 모집 목록</h2>
+  <div th:each="s : ${studies}" class="card">
+    <h3 th:text="${s}">스터디 제목</h3>
+    <p>모집중</p>
+  </div>
+</div>
+</body>
+</html>

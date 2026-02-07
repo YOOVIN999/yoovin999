@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>스터디 상세 정보</title>
+</head>
+<body>
+<h1>스터디 상세 페이지</h1>
+<p>스터디 번호: <span th:text="${studyId}">1</span></p>
+<h2 th:text="${title}">제목</h2>
+<p th:text="${content}">내용</p>
+<hr>
+<a href="/study">목록으로 돌아가기</a>
+</body>
+</html>
